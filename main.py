@@ -1,7 +1,14 @@
 import math
+from os import system, name
 from tabulate import tabulate
 
 object_ay = -9.81
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
 
 print("Enter 1 for Viy and Vix and 2 for Vi and Θ.")
 
@@ -27,6 +34,8 @@ match int(input()):
     case _:
         print("Invalid selection") 
 
+clear()
+
 object_vf = math.sqrt(object_vix**2 + (-object_viy)**2)
 
 object_ty = (-object_viy)/(-9.81)
@@ -36,11 +45,11 @@ object_dx = object_vix * object_tx
 object_dy = (object_viy * object_ty) + (0.5*object_ay*(object_ty**2)) 
 
 data = [
-    ["Vi", round(object_vix), round(object_viy)],
-    ["Vf", round(object_vix), round(-object_viy)],
-    ["a", "0", round(object_ay)],
-    ["d", round(object_dx), round(object_dy)],
-    ["t", round(object_tx), round(object_ty)]
+    ["Vi", round(object_vix, 1), round(object_viy, 1)],
+    ["Vf", round(object_vix, 1), round(-object_viy, 1)],
+    ["a", "0", round(object_ay, 1)],
+    ["d", round(object_dx, 1), round(object_dy, 1)],
+    ["t", round(object_tx, 1), round(object_ty, 1)]
 ]
 
 print(tabulate(data, headers=["Variable", "x", "y"]))
