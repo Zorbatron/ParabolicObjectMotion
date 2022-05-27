@@ -10,6 +10,8 @@ def clear():
     else:
         _ = system('clear')
 
+clear()
+
 print("Enter 1 for Viy and Vix and 2 for Vi and Θ.")
 
 match int(input()):
