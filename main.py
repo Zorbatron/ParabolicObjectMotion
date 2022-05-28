@@ -1,5 +1,4 @@
 import math
-from operator import index
 import os
 import sys
 from tabulate import tabulate
@@ -70,7 +69,7 @@ data = [
     ["Vi    | m/s", round(object_vix, roundingAmount), round(object_viy, roundingAmount)],
     ["Vf    | m/s", round(object_vix, roundingAmount), "0"],
     ["a     | m/s^2", "0", round(object_ay, roundingAmount)],
-    ["d     | m", round(object_dx, roundingAmount), round(object_dx, roundingAmount)],
+    ["d     | m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)],
     ["t     | sec", round(object_tx, roundingAmount), round(object_ty, roundingAmount)]
 ]
 print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
@@ -79,10 +78,12 @@ print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAm
 print("Object's Vi:", round(object_vi, roundingAmount))
 
 print("\nEnter time at which to evaluate or enter \"n\" to exit")
-object_tEval = float(input())
+evaluate = input()
 
-if (object_tEval == "n" or object_tEval == "N"):
+if (evaluate == "n" or evaluate == "N"):
     exit()
+
+object_tEval = float(evaluate)
 
 object_dx = object_vix * object_tEval
 object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
