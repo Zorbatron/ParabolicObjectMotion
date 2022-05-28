@@ -22,23 +22,23 @@ def clear():
 
 clear()
 
-match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.")):
+match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n")):
     case 1:
         clear()
-        object_vix = float(input("Input object's initial horizontal velocity."))
+        object_vix = float(input("Input object's initial horizontal velocity.\n"))
         clear()
 
-        object_viy = float(input("Input object's initial vertical velocity."))
+        object_viy = float(input("Input object's initial vertical velocity.\n"))
         clear()
 
         object_vi = math.sqrt( object_vix**2 + object_viy**2 )
         object_thetaRadians = math.atan(object_viy/object_vix)
     case 2:
         clear()
-        object_vi = float(input("Input object's initial velocity."))
+        object_vi = float(input("Input object's initial velocity.\n"))
         clear()
 
-        object_thetaRadians = float(input("Input object's angle from the horizontal in degrees.")) * math.pi/180
+        object_thetaRadians = float(input("Input object's angle from the horizontal in degrees.\n")) * math.pi/180
         clear()
 
         object_vix = object_vi * math.cos(object_thetaRadians)
@@ -58,11 +58,11 @@ object_dx = object_vix * object_tx
 object_dy = (object_viy * object_ty) + (0.5*object_ay*(object_ty**2)) 
 
 data = [
-    ["Vi    | m/s", round(object_vix, roundingAmount), round(object_viy, roundingAmount)],
-    ["Vf    | m/s", round(object_vix, roundingAmount), "0"],
-    ["a     | m/s^2", "0", round(object_ay, roundingAmount)],
-    ["d     | m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)],
-    ["t     | sec", round(object_tx, roundingAmount), round(object_ty, roundingAmount)]
+    ["Vi    |   m/s", round(object_vix, roundingAmount), round(object_viy, roundingAmount)],
+    ["Vf    |   m/s", round(object_vix, roundingAmount), "0"],
+    ["a     |   m/s^2", "0", round(object_ay, roundingAmount)],
+    ["d     |   m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)],
+    ["t     |   sec", round(object_tx, roundingAmount), round(object_ty, roundingAmount)]
 ]
 print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
 
@@ -70,7 +70,7 @@ print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAm
 print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
 
 while True:
-    evaluate = input("\nEnter time at which to evaluate or enter \"n\" to exit")
+    evaluate = input("\nEnter time at which to evaluate or enter \"n\" to exit\n")
     delete_last_lines(2)
     if (evaluate == "n"):
         exit()
@@ -84,7 +84,7 @@ while True:
     object_vy = object_viy + (object_tEval*object_ay)
 
     data = [
-        ["v     | m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
-        ["d     | m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
+        ["v     |   m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
+        ["d     |   m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
     ]
     print(tabulate(data, headers=["Variable @ " + str(object_tEval) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
