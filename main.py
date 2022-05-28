@@ -74,14 +74,15 @@ data = [
 ]
 print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
 
-print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount))
-print("Object's Vi:", round(object_vi, roundingAmount))
+print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount), "\b°")
+print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
 
 print("\nEnter time at which to evaluate or enter \"n\" to exit")
 evaluate = input()
 
 if (evaluate == "n" or evaluate == "N"):
     exit()
+delete_last_lines(2)
 
 object_tEval = float(evaluate)
 
