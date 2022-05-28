@@ -15,6 +15,7 @@ object_ay = -9.81
 object_ax = 0.0
 
 roundingAmount = 2
+evaluate = ""
 
 def clear():
     if os.name == 'nt':
@@ -77,24 +78,23 @@ print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_nu
 print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount), "\b°")
 print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
 
-print("\nEnter time at which to evaluate or enter \"n\" to exit")
-evaluate = input()
+while True:
+    print("\nEnter time at which to evaluate or enter \"n\" to exit")
+    evaluate = input()
+    delete_last_lines(2)
+    if (evaluate == "n"):
+        exit()
 
-if (evaluate == "n" or evaluate == "N"):
-    exit()
-delete_last_lines(2)
+    object_tEval = float(evaluate)
 
-object_tEval = float(evaluate)
+    object_dx = object_vix * object_tEval
+    object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
 
-object_dx = object_vix * object_tEval
-object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
+    object_vx = object_vix + (object_tEval*object_ax)
+    object_vy = object_viy + (object_tEval*object_ay)
 
-object_vx = object_vix + (object_tEval*object_ax)
-object_vy = object_viy + (object_tEval*object_ay)
-
-data = [
-    ["v     | m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
-    ["d     | m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)],
-    ["t     | sec", round(object_tEval, roundingAmount), round(object_tEval, roundingAmount)]
-]
-print(tabulate(data, headers=["Variable @ " + str(object_tEval) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
+    data = [
+        ["v     | m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
+        ["d     | m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
+    ]
+    print(tabulate(data, headers=["Variable @ " + str(object_tEval) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
