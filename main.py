@@ -18,36 +18,27 @@ roundingAmount = 2
 evaluate = ""
 
 def clear():
-    if os.name == 'nt':
-        _ = os.system('cls')
-    else:
-        _ = os.system('clear')
+    _ = os.system('cls') if os.name == 'nt' else os.system('clear')
 
 clear()
 
-print("Enter 1 for Viy and Vix and 2 for Vi and Θ.")
-
-match int(input()):
+match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.")):
     case 1:
         clear()
-        print("Input object's initial horizontal velocity.")
-        object_vix = float(input())
+        object_vix = float(input("Input object's initial horizontal velocity."))
         clear()
 
-        print("Input object's initial vertical velocity.")
-        object_viy = float(input())
+        object_viy = float(input("Input object's initial vertical velocity."))
         clear()
 
         object_vi = math.sqrt( object_vix**2 + object_viy**2 )
         object_thetaRadians = math.atan(object_viy/object_vix)
     case 2:
         clear()
-        print("Input object's initial velocity.")
-        object_vi = float(input())
+        object_vi = float(input("Input object's initial velocity."))
         clear()
 
-        print("Input object's angle from the horizontal in degrees.")
-        object_thetaRadians = float(input()) * math.pi/180
+        object_thetaRadians = float(input("Input object's angle from the horizontal in degrees.")) * math.pi/180
         clear()
 
         object_vix = object_vi * math.cos(object_thetaRadians)
@@ -79,8 +70,7 @@ print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAm
 print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
 
 while True:
-    print("\nEnter time at which to evaluate or enter \"n\" to exit")
-    evaluate = input()
+    evaluate = input("\nEnter time at which to evaluate or enter \"n\" to exit")
     delete_last_lines(2)
     if (evaluate == "n"):
         exit()
