@@ -63,4 +63,5 @@ data = [
 ]
 
 print(tabulate(data, headers=["Variable", "x", "y"]))
-print("Object's angle was:", round(object_thetaRadians*180/math.pi, 2))
+print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount))
+print("Object's Vi:", round(object_vi, roundingAmount))
