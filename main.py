@@ -44,7 +44,7 @@ match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n")):
         object_vix = object_vi * math.cos(object_thetaRadians)
         object_viy = object_vi * math.sin(object_thetaRadians)
     case _:
-        print("Invalid selection") 
+        print("Invalid selection.") 
         exit()
 
 clear()
