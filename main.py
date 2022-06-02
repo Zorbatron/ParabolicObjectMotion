@@ -1,5 +1,5 @@
 import math
-import os
+from os import system, name
 import sys
 from tabulate import tabulate
 
@@ -11,14 +11,14 @@ def delete_last_lines(n):
         sys.stdout.write(CURSOR_UP_ONE) 
         sys.stdout.write(ERASE_LINE) 
 
+def clear():
+    _ = system('cls') if name == 'nt' else system('clear')
+    
 object_ay = -9.81
 object_ax = 0.0
 
 roundingAmount = 2
 evaluate = ""
-
-def clear():
-    _ = os.system('cls') if os.name == 'nt' else os.system('clear')
 
 clear()
 
@@ -69,11 +69,13 @@ print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_nu
 print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount), "\b°")
 print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
 
-while True:
+cont = True
+while cont:
     evaluate = input("\nEnter time at which to evaluate or enter \"n\" to exit\n")
     delete_last_lines(2)
     if (evaluate == "n"):
-        exit()
+        cont = False
+        continue
 
     object_tEval = float(evaluate)
 
