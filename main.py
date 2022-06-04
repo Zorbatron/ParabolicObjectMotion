@@ -18,12 +18,11 @@ object_ay = -9.81
 object_ax = 0.0
 
 roundingAmount = 2
-evaluate = ""
 
 clear()
 
-match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n")):
-    case 1:
+match input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n"):
+    case "1":
         clear()
         object_vix = float(input("Input object's initial horizontal velocity.\n"))
         clear()
@@ -33,7 +32,7 @@ match int(input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n")):
 
         object_vi = math.sqrt( object_vix**2 + object_viy**2 )
         object_thetaRadians = math.atan(object_viy/object_vix)
-    case 2:
+    case "2":
         clear()
         object_vi = float(input("Input object's initial velocity.\n"))
         clear()
@@ -66,27 +65,50 @@ data = [
 ]
 print(tabulate(data, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
 
-print("\nObject's angle was:", round(object_thetaRadians*180/math.pi, roundingAmount), "\b°")
-print("Object's Vi:", round(object_vi, roundingAmount), "m/s")
+print("\nΘ: ", round(object_thetaRadians*180/math.pi, roundingAmount), "\b°")
+print("Vi:", round(object_vi, roundingAmount), "m/s")
 
 cont = True
 while cont:
-    evaluate = input("\nEnter time at which to evaluate or enter \"n\" to exit\n")
+    evalType = input("\nEnter t, dx, or dy to evaluate. Anything else to exit\n")
     delete_last_lines(2)
-    if (evaluate == "n"):
+
+    if evalType == "t":
+        object_tEval = float(input("Enter time: "))
+        delete_last_lines(1)
+
+        object_dx = object_vix * object_tEval
+        object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
+
+        object_vx = object_vix + (object_tEval*object_ax)
+        object_vy = object_viy + (object_tEval*object_ay)
+
+        data = [
+            ["v     |   m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
+            ["d     |   m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
+        ]
+        print(tabulate(data, headers=["Data @ " + str(round(object_tEval, roundingAmount)) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
+    elif evalType == "dx":
+        object_dxEval = float(input("Enter horizontal distance: "))
+        print()
+
+        object_tEval = object_dxEval/object_vix
+
+        object_dx = object_vix * object_tEval
+        object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
+
+        object_vx = object_vix + (object_tEval*object_ax)
+        object_vy = object_viy + (object_tEval*object_ay)
+
+        data = [
+            ["v     |   m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
+            ["d     |   m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
+        ]
+        print(tabulate(data, headers=["Data @ " + str(round(object_tEval, roundingAmount)) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
+    elif evalType == "dy":
+        object_dyEval = input("Enter vertical distance: ")
+
+        print("Just kidding, I haven't implemented this feature yet lol!")
+    else:
         cont = False
-        continue
-
-    object_tEval = float(evaluate)
-
-    object_dx = object_vix * object_tEval
-    object_dy = (object_viy * object_tEval) + (0.5*object_ay*(object_tEval**2)) 
-
-    object_vx = object_vix + (object_tEval*object_ax)
-    object_vy = object_viy + (object_tEval*object_ay)
-
-    data = [
-        ["v     |   m/s", round(object_vx, roundingAmount), round(object_vy, roundingAmount)],
-        ["d     |   m", round(object_dx, roundingAmount), round(object_dy, roundingAmount)]
-    ]
-    print(tabulate(data, headers=["Variable @ " + str(object_tEval) + " s", "x", "y"], tablefmt="grid", disable_numparse=True))
+        delete_last_lines(1)
