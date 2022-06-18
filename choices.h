@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#define object_ay -9.81
 #define pi 3.14159265358
 using namespace std;
 
