@@ -4,12 +4,12 @@
 #define pi 3.14159265358
 using namespace std;
 
-void finish(float object_vix, float object_viy) {
-  double object_vf = sqrt(pow(object_vix, 2) + pow((-object_viy), 2));
-  double object_ty = (-object_viy)/(object_ay);
+void finish(float obj_vix, float obj_viy) {
+  double object_vf = sqrt(pow(obj_vix, 2) + pow((-obj_viy), 2));
+  double object_ty = (-obj_viy)/(object_ay);
   double object_tx = 2 * object_ty;
-  double object_dx = object_vix * object_tx;
-  double object_dy = (object_viy * object_ty) + (0.5*object_ay*(pow(object_ty, 2)));
+  double object_dx = obj_vix * object_tx;
+  double object_dy = (objt_viy * object_ty) + (0.5*object_ay*(pow(object_ty, 2)));
 }
 
 void choice_1(float object_vix, float object_viy) {
