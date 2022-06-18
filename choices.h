@@ -4,7 +4,7 @@
 #define pi 3.14159265358
 using namespace std;
 
-void finish() {
+void finish(float object_vix, float object_viy) {
   double object_vf = sqrt(pow(object_vix, 2) + pow((-object_viy), 2));
   double object_ty = (-object_viy)/(object_ay);
   double object_tx = 2 * object_ty;
@@ -15,10 +15,12 @@ void finish() {
 void choice_1(float object_vix, float object_viy) {
   object_vi = sqrt(pow(object_vix, 2) + pow(object_viy, 2));
   object_thetaRadians = atan(object_viy/object_vix);
+  finish(object_vix, object_viy);
 }
 
 void choice_2(double object_thetaRadians, double object_vi) {
   object_thetaRadians *= pi/180;
   object_vix = object_vi * cos(object_thetaRadians);
   object_viy = object_vi * sin(object_thetaRadians);
+  finish(object_vix, object_viy);
 }
