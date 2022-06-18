@@ -13,10 +13,6 @@ void finish() {
 }
 
 void choice_1() {
-  cout << "Input object's initial horizontal velocity.\n";
-  cin >> object_vix;
-  cout << "Input object's initial vertical velocity.\n";
-  cin >> object_viy;
   object_vi = sqrt(pow(object_vix, 2) + pow(object_viy, 2));
   object_thetaRadians = atan(object_viy/object_vix);
 }
