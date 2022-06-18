@@ -1,4 +1,3 @@
-#include "choices.h"
 #include <iostream>
 #include <cmath>
 #define pi 3.14159265358
