@@ -32,5 +32,4 @@ int main() {
       choice_2();
       break;
   }
-  finish();
 }
