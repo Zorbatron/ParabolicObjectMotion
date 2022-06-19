@@ -12,10 +12,10 @@ void finish(float obj_vix, float obj_viy) {
   double object_dy = (objt_viy * object_ty) + (0.5*object_ay*(pow(object_ty, 2)));
 }
 
-void choice_1(float object_vix, float object_viy) {
-  object_vi = sqrt(pow(object_vix, 2) + pow(object_viy, 2));
-  object_thetaRadians = atan(object_viy/object_vix);
-  finish(object_vix, object_viy);
+void choice_1(float vix, float viy) {
+  object_vi = sqrt(pow(vix, 2) + pow(viy, 2));
+  object_thetaRadians = atan(viy/vix);
+  finish(vix, viy);
 }
 
 void choice_2(double object_thetaRadians, double object_vi) {
