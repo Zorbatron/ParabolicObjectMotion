@@ -18,9 +18,9 @@ void choice_1(float vix, float viy) {
   finish(vix, viy);
 }
 
-void choice_2(double object_thetaRadians, double object_vi) {
-  object_thetaRadians *= pi/180;
-  object_vix = object_vi * cos(object_thetaRadians);
-  object_viy = object_vi * sin(object_thetaRadians);
+void choice_2(double obj_thetaRadians, double obj_vi) {
+  obj_thetaRadians *= pi/180;
+  object_vix = obj_vi * cos(obj_thetaRadians);
+  object_viy = obj_vi * sin(obj_thetaRadians);
   finish(object_vix, object_viy);
 }
