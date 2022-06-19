@@ -22,14 +22,14 @@ int main() {
       cin >> object_vix;
       cout << "Input object's initial vertical velocity.\n";]
       cin >> object_viy;
-      choice_1();
+      choice_1(object_vix, object_viy);
       break;
     case 2:
       cout << "Input object's initial velocity.\n";
       cin >> object_vi;
       cout << "Input object's angle from the horizontal in degrees.\n";
       cin >> object_thetaRadians;
-      choice_2();
+      choice_2(object_thetaRadians, object_vi);
       break;
   }
 }
