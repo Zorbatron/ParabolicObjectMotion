@@ -3,8 +3,8 @@
 # objectTx, objectTy, objectDx, ObjectDy.
 objectData = []
 
-# The evalData list ALWAYS goes: objectVx, objectVy, objectDx, objectDy.
-evalData = []
+# The evalData list ALWAYS goes: objectVx, objectVy, objectDx, objectDy, evalTime.
+#evalData = []
 
 from tabulate import tabulate
 from os import system, name
@@ -90,6 +90,9 @@ def InitialPlot(objectDataToPlot):
     print("\nΘ: ", round(objectData[3]*180/math.pi, constants.roundingAmount), "\b°")
     print("Vi:", round(objectData[2], constants.roundingAmount), "m/s")
 
+def EvalStringMaker(evalTime):
+    return "Data @ " + str(round(evalTime, constants.roundingAmount)) + "s"
+
 # The function to plot the evaluation data
 # The evalString should look something like this: "Data @ 2.1s" or "Data @ 5.2m"
 def EvaluationPlot(evalData, evalString):
@@ -103,22 +106,33 @@ def EvaluationPlot(evalData, evalString):
 def TimeEvaluation(evalTime, objectData):
     DeleteLastLines(1)
 
+    evalData = []
+
     evalDx = objectData[0] * evalTime
     evalDy = (objectData[1] * evalTime) + (0.5*constants.objectAy*(evalTime**2))
 
     evalVx = objectData[0] + (evalTime*constants.objectAx)
-    evalXy = objectData[1] + (evalTime*constants.objectAy)
+    evalVy = objectData[1] + (evalTime*constants.objectAy)
 
     evalData.append(evalVx)
-    evalData.append(evalXy)
+    evalData.append(evalVy)
     evalData.append(evalDx)
     evalData.append(evalDy)
+    evalData.append(evalTime)
 
     return evalData
 
 # Evaluate at a certain X distance.
 def HorizontalEvaluation(evalDx, objectData):
-    print("Horizontal Evaluation Selected!")
+    DeleteLastLines(1)
+
+    evalData = []
+
+    evalTime = evalDx/objectData[0]
+
+    evalData = TimeEvaluation(evalTime, objectData)
+
+    return evalData
 
 # Evaluate at a certain Y distance.
 def VerticalEvaluation(evalDy, objectData):
