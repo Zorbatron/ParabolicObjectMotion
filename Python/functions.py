@@ -20,7 +20,7 @@ def DeleteLastLines(n):
 
 # Clear the screen depending on the OS
 def Clear():
-    _ = system('cls') if name == 'nt' else system('Clear')
+    _ = system('cls') if name == 'nt' else system('clear')
 
 # Getting the values depending on the horizontal and vertical components of the initial velocity.
 def VixViy():
