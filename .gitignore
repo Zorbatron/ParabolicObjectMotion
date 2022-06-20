@@ -1,2 +1,5 @@
 .vs
 Python/__pycache__
+Python/build
+Python/dist
+Python/main.spec
