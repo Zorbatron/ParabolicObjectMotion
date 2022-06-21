@@ -55,7 +55,9 @@ def main():
                         print("Cannot evaluate at 0m")
                         continue
 
+                # Plot the data for PreApex
                 functions.EvaluationPlot(evalData[0], functions.EvalStringMaker(evalData[0][4]))
+                # Plot the data for AftApex
                 functions.EvaluationPlot(evalData[1], functions.EvalStringMaker(evalData[1][4]))
 
 

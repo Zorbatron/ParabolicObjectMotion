@@ -69,7 +69,7 @@ def InitialCalc(objectDataPreCalc):
     objectTy = (-objectDataPreCalc[1])/(constants.objectAy)
     objectTx = objectTy * 2
 
-    objectDx = objectDataPreCalc[0] * objectTx
+    objectDx = (objectDataPreCalc[0] * objectTx) + (0.5*constants.objectAx*(objectTx**2))
     objectDy = (objectDataPreCalc[1] * objectTy) + (0.5*constants.objectAy*(objectTy**2)) 
 
     objectDataPreCalc.append(objectTx)
@@ -98,7 +98,6 @@ def EvalStringMaker(evalTime):
     return "Data @ " + str(round(evalTime, constants.roundingAmount)) + "s"
 
 # The function to plot the evaluation data
-# The evalString should look something like this: "Data @ 2.1s" or "Data @ 5.2m"
 def EvaluationPlot(objectDataToPlot, evalString):
     data = [
         ["v     |   m/s", round(objectDataToPlot[0], constants.roundingAmount), round(objectDataToPlot[1], constants.roundingAmount)],
@@ -112,7 +111,7 @@ def TimeEvaluation(evalTime, objectData):
 
     evalData = []
 
-    evalDx = objectData[0] * evalTime
+    evalDx = (objectData[0] * evalTime) + (0.5*constants.objectAx*(evalTime**2))
     evalDy = (objectData[1] * evalTime) + (0.5*constants.objectAy*(evalTime**2))
 
     evalVx = objectData[0] + (evalTime*constants.objectAx)
