@@ -5,7 +5,7 @@ def main():
     functions.Clear()
 
     # Get option from the user.
-    match input("Enter 1 for Viy and Vix and 2 for Vi and Θ.\n"):
+    match input("Enter 1 for Viy and Vix and 2 for Vi and Θ: "):
         case "1":
             objectDataPreCalc = functions.VixViy()
 
@@ -25,7 +25,7 @@ def main():
     # The time/distance evaluation loop.
     cont = True
     while cont:
-        evalType = input("\nEnter t, dx, or dy to evaluate. Anything else to exit\n")
+        evalType = input("\nEnter t, dx, or dy to evaluate. Anything else to exit: ")
         functions.DeleteLastLines(2)
 
         match evalType:
@@ -42,17 +42,25 @@ def main():
                 functions.EvaluationPlot(evalData, functions.EvalStringMaker(evalData[4]))
 
             case "dy":
-
-                # DO NOT USE. I HAVEN'T IMPLEMENTED THE VERTICAL EVALUATION FUNCTION YET!!!!!
-
                 # Get distance, calculate at that distance, and plot the data.
-                evalDy = float(input("Enter Horizontal Distance: "))
+                evalDy = float(input("Enter Vertical Distance: "))
                 evalData = functions.VerticalEvaluation(evalDy, objectData)
-                #functions.EvaluationPlot(evalData, "Data @ " + str(evalDy) + " m")
+
+                # "Error codes" if the requested Dy is invalid
+                match evalData:
+                    case 0:
+                        print("Requested vertical distance is above the objects max Dy!")
+                        continue
+                    case 1:
+                        print("Cannot evaluate at 0m")
+                        continue
+
+                functions.EvaluationPlot(evalData[0], functions.EvalStringMaker(evalData[0][4]))
+                functions.EvaluationPlot(evalData[1], functions.EvalStringMaker(evalData[1][4]))
+
 
             case _:
                 cont = False
-                functions.DeleteLastLines(1)
 
 if __name__ == "__main__":
     main()

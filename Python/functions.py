@@ -1,10 +1,10 @@
 # The objectData list ALWAYS goes: 
 # objectVix, objectViy, objectVi, objectThetaRadians, 
 # objectTx, objectTy, objectDx, ObjectDy.
-objectData = []
+# objectData = []
 
 # The evalData list ALWAYS goes: objectVx, objectVy, objectDx, objectDy, evalTime.
-#evalData = []
+# evalData = []
 
 from tabulate import tabulate
 from os import system, name
@@ -24,11 +24,13 @@ def Clear():
 
 # Getting the values depending on the horizontal and vertical components of the initial velocity.
 def VixViy():
+    objectData = []
+
     Clear()
-    objectVix = float(input("Input object's initial horizontal velocity.\n"))
+    objectVix = float(input("Input object's initial horizontal velocity: "))
     Clear()
 
-    objectViy = float(input("Input object's initial vertical velocity.\n"))
+    objectViy = float(input("Input object's initial vertical velocity: "))
     Clear()
 
     objectVi = math.sqrt( objectVix**2 + objectViy**2 )
@@ -43,11 +45,13 @@ def VixViy():
 
 # Getting the values depending on the initial velcities resultant vector and it's angle to the horizontal.
 def ViTheta():
+    objectData = []
+
     Clear()
-    objectVi = float(input("Input object's initial velocity.\n"))
+    objectVi = float(input("Input object's initial velocity: "))
     Clear()
 
-    objectThetaRadians = float(input("Input object's angle from the horizontal in degrees.\n")) * math.pi/180
+    objectThetaRadians = float(input("Input object's angle from the horizontal in degrees: ")) * math.pi/180
     Clear()
 
     objectVix = objectVi * math.cos(objectThetaRadians)
@@ -87,24 +91,24 @@ def InitialPlot(objectDataToPlot):
 
     print(tabulate(plotData, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
 
-    print("\nΘ: ", round(objectData[3]*180/math.pi, constants.roundingAmount), "\b°")
-    print("Vi:", round(objectData[2], constants.roundingAmount), "m/s")
+    print("\nΘ: ", round(objectDataToPlot[3]*180/math.pi, constants.roundingAmount), "\b°")
+    print("Vi:", round(objectDataToPlot[2], constants.roundingAmount), "m/s\n")
 
 def EvalStringMaker(evalTime):
     return "Data @ " + str(round(evalTime, constants.roundingAmount)) + "s"
 
 # The function to plot the evaluation data
 # The evalString should look something like this: "Data @ 2.1s" or "Data @ 5.2m"
-def EvaluationPlot(evalData, evalString):
+def EvaluationPlot(objectDataToPlot, evalString):
     data = [
-        ["v     |   m/s", round(evalData[0], constants.roundingAmount), round(evalData[1], constants.roundingAmount)],
-        ["d     |   m", round(evalData[2], constants.roundingAmount), round(evalData[3], constants.roundingAmount)]
+        ["v     |   m/s", round(objectDataToPlot[0], constants.roundingAmount), round(objectDataToPlot[1], constants.roundingAmount)],
+        ["d     |   m", round(objectDataToPlot[2], constants.roundingAmount), round(objectDataToPlot[3], constants.roundingAmount)]
     ]
     print(tabulate(data, headers=[evalString, "x", "y"], tablefmt="grid", disable_numparse=True))
 
 # Evaluate at a certain time.
 def TimeEvaluation(evalTime, objectData):
-    DeleteLastLines(1)
+    #DeleteLastLines(1)
 
     evalData = []
 
@@ -124,8 +128,6 @@ def TimeEvaluation(evalTime, objectData):
 
 # Evaluate at a certain X distance.
 def HorizontalEvaluation(evalDx, objectData):
-    DeleteLastLines(1)
-
     evalData = []
 
     evalTime = evalDx/objectData[0]
@@ -136,4 +138,19 @@ def HorizontalEvaluation(evalDx, objectData):
 
 # Evaluate at a certain Y distance.
 def VerticalEvaluation(evalDy, objectData):
-    print("Vertical Evaluation Selected!")
+    # Determine if the requested Dy is suitable for evaluation and do calcs depending on if it's above or below the x axis.
+    if (evalDy > objectData[7]):
+        # If the requested height is above it's apex.
+        return 0
+    elif (evalDy == 0):
+        # If the requested height is 0m.
+        return 1
+    elif (evalDy > 0):
+        evalTyPreApex = ( (-objectData[1]) + math.sqrt( (objectData[1]**2) + (2*constants.objectAy*evalDy) ) ) / constants.objectAy
+        evalTyAftApex = ( (-objectData[1]) - math.sqrt( (objectData[1]**2) + (2*constants.objectAy*evalDy) ) ) / constants.objectAy
+
+        evalDataPreApex = TimeEvaluation(evalTyPreApex, objectData)
+        evalDataAftApex = TimeEvaluation(evalTyAftApex, objectData)
+
+        # Return a list that contains the two lists of evaluation data. (Multi dimenstional lists!! <:O)
+        return [evalDataPreApex, evalDataAftApex]
