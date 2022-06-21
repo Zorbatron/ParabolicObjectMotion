@@ -26,7 +26,7 @@ def main():
     cont = True
     while cont:
         evalType = input("\nEnter t, dx, or dy to evaluate. Anything else to exit: ")
-        functions.DeleteLastLines(2)
+        functions.DeleteLastLines(1)
 
         match evalType:
             case "t": 
@@ -61,6 +61,7 @@ def main():
 
             case _:
                 cont = False
+                functions.DeleteLastLines(1)
 
 if __name__ == "__main__":
     main()

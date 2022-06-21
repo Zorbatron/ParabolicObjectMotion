@@ -92,7 +92,7 @@ def InitialPlot(objectDataToPlot):
     print(tabulate(plotData, headers=["Variable", "x", "y"], tablefmt="grid", disable_numparse=True))
 
     print("\nΘ: ", round(objectDataToPlot[3]*180/math.pi, constants.roundingAmount), "\b°")
-    print("Vi:", round(objectDataToPlot[2], constants.roundingAmount), "m/s\n")
+    print("Vi:", round(objectDataToPlot[2], constants.roundingAmount), "m/s")
 
 def EvalStringMaker(evalTime):
     return "Data @ " + str(round(evalTime, constants.roundingAmount)) + "s"
