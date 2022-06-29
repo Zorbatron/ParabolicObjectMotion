@@ -31,20 +31,41 @@ def main():
         match evalType:
             case "t": 
                 # Get time, calculate at that time, and plot the data.
-                evalTime = float(input("Enter Time: "))
-                evalData = functions.TimeEvaluation(evalTime, objectData)
-                functions.EvaluationPlot(evalData, functions.EvalStringMaker(evalData[4]))
+                gottime = True
+                while gottime:
+                    try:
+                        evalTime = float(input("Enter Time: "))
+                        evalData = functions.TimeEvaluation(evalTime, objectData)
+                        functions.EvaluationPlot(evalData, functions.EvalStringMaker(evalData[4]))
+                    except ValueError:
+                        continue
+                    else:
+                        gottime = False
 
             case "dx":
                 # Get distance, calculate at that distance, and plot the data.
-                evalDx = float(input("Enter Horizontal Distance: "))
-                evalData = functions.HorizontalEvaluation(evalDx, objectData)
-                functions.EvaluationPlot(evalData, functions.EvalStringMaker(evalData[4]))
+                gothoriz = True
+                while gothoriz:
+                    try:
+                        evalDx = float(input("Enter Horizontal Distance: "))
+                        evalData = functions.HorizontalEvaluation(evalDx, objectData)
+                        functions.EvaluationPlot(evalData, functions.EvalStringMaker(evalData[4]))
+                    except ValueError:
+                        continue
+                    else:
+                        gothoriz = False
 
             case "dy":
                 # Get distance, calculate at that distance, and plot the data.
-                evalDy = float(input("Enter Vertical Distance: "))
-                evalData = functions.VerticalEvaluation(evalDy, objectData)
+                gotvert = True
+                while gotvert:
+                    try:
+                        evalDy = float(input("Enter Vertical Distance: "))
+                        evalData = functions.VerticalEvaluation(evalDy, objectData)
+                    except ValueError:
+                        continue
+                    else:
+                        gotvert = False
 
                 # "Error codes" if the requested Dy is invalid
                 match evalData:
