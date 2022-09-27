@@ -1,5 +1,6 @@
-//C++ Version of Parabolic Object Motion program
+// C++ Version of Parabolic Object Motion program
 // @author: Velocities
+// Original logic credit and python code goes to Zorbatron
 // @version: 1.0
 #include <iostream>
 #include <cstdlib>
