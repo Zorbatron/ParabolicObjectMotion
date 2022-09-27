@@ -1,4 +1,6 @@
 //C++ Version of Parabolic Object Motion program
+// @author: Velocities
+// @version: 1.0
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
@@ -9,30 +11,43 @@
 using namespace std;
 
 int main() {
+  // Allocate necessary memory for values user will enter
   float object_vix;
   float object_viy;
   double object_vi;
   double object_thetaRadians;
   int choice;
-  cout << "Enter 1 for Viy and Vix and 2 for Vi and Θ.\n";
-  cin >> choice;
+  // Ensure user types a valid choice
+  bool get_choice;
+  do {
+    try {
+      cout << "Enter 1 for Viy and Vix and 2 for Vi and Θ.\n";
+      cin >> choice;
+      if (choice == 1 || choice == 2) {
+        get_choice = false;
+      }
+      else {
+        get_choice = true;
+        cout << "Invalid choice" << endl;
+      }
+    } while (get_choice);
+  
   switch (choice) {
     case 1:
-      bool get_vix = true;
-      while (get_vix) {
+      // Avoid dividing by 0 by ensuring user types a valid number (not 0)
+      bool get_vix;
+      do {
         cout << "Input object's initial horizontal velocity.\n";
-        try {
-          cin >> object_vix;
-          if (object_vix == 0) {
-            throw 0;
-          get_vix = false;
-          }
-        }
-        catch (int x) {
+        cin >> object_vix;
+        if (object_vix == 0) {
+          get_vix = true;
           cout << "Invalid horizontal velocity: Cannot divide by 0 in calculations!" << endl;
         }
-      }
-      cout << "Input object's initial vertical velocity.\n";]
+        else {
+          get_vix = false;
+        }
+      } while (get_vix);
+      cout << "Input object's initial vertical velocity.\n";
       cin >> object_viy;
       choice_1(object_vix, object_viy);
       break;
