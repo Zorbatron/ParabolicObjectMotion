@@ -21,7 +21,6 @@ int main() {
   // Ensure user types a valid choice
   bool get_choice;
   do {
-    try {
       cout << "Enter 1 for Viy and Vix and 2 for Vi and Θ.\n";
       cin >> choice;
       if (choice == 1 || choice == 2) {
