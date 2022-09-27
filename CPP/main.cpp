@@ -18,8 +18,20 @@ int main() {
   cin >> choice;
   switch (choice) {
     case 1:
-      cout << "Input object's initial horizontal velocity.\n";
-      cin >> object_vix;
+      bool get_vix = true;
+      while (get_vix) {
+        cout << "Input object's initial horizontal velocity.\n";
+        try {
+          cin >> object_vix;
+          if (object_vix == 0) {
+            throw 0;
+          get_vix = false;
+          }
+        }
+        catch (int x) {
+          cout << "Invalid horizontal velocity: Cannot divide by 0 in calculations!" << endl;
+        }
+      }
       cout << "Input object's initial vertical velocity.\n";]
       cin >> object_viy;
       choice_1(object_vix, object_viy);
