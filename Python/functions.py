@@ -24,10 +24,16 @@ def Clear():
 
 # Getting the values depending on the horizontal and vertical components of the initial velocity.
 def VixViy():
-    objectData = []
-
     Clear()
-    objectVix = float(input("Input object's initial horizontal velocity: "))
+    # Ensure user enters a value other than 0 (you cannot divide by 0)
+    getvix = True
+    while getvix:
+        objectVix = float(input("Input object's initial horizontal velocity: "))
+        if objectVix == 0:
+            print("Invalid horizontal velocity: Cannot divide by 0 in calculations!")
+            continue
+        else:
+            getvix = False
     Clear()
 
     objectViy = float(input("Input object's initial vertical velocity: "))
@@ -35,17 +41,13 @@ def VixViy():
 
     objectVi = math.sqrt( objectVix**2 + objectViy**2 )
     objectThetaRadians = math.atan(objectViy/objectVix)
-
-    objectData.append(objectVix)
-    objectData.append(objectViy)
-    objectData.append(objectVi)
-    objectData.append(objectThetaRadians)
+    
+    objectData = [objectVix, objectViy, objectVi, objectThetaRadians]
 
     return objectData
 
 # Getting the values depending on the initial velcities resultant vector and it's angle to the horizontal.
 def ViTheta():
-    objectData = []
 
     Clear()
     objectVi = float(input("Input object's initial velocity: "))
@@ -57,10 +59,7 @@ def ViTheta():
     objectVix = objectVi * math.cos(objectThetaRadians)
     objectViy = objectVi * math.sin(objectThetaRadians)
     
-    objectData.append(objectVix)
-    objectData.append(objectViy)
-    objectData.append(objectVi)
-    objectData.append(objectThetaRadians)
+    objectData = [objectVix, objectViy, objectVi, objectThetaRadians]
 
     return objectData
 
@@ -116,12 +115,8 @@ def TimeEvaluation(evalTime, objectData):
 
     evalVx = objectData[0] + (evalTime*constants.objectAx)
     evalVy = objectData[1] + (evalTime*constants.objectAy)
-
-    evalData.append(evalVx)
-    evalData.append(evalVy)
-    evalData.append(evalDx)
-    evalData.append(evalDy)
-    evalData.append(evalTime)
+    
+    evalData = [evalVx, evalVy, evalDx, evalDy, evalTime]
 
     return evalData
 
